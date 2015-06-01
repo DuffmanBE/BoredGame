@@ -37,17 +37,17 @@ def makeTile(row,col,str, id):
 }
 
 
-WIDTH  = 8
-HEIGHT = 6
+WIDTH  = 5
+HEIGHT = 5
 G = "grass"
 D = "dirt"
+F = "fogg"
 HARD_CODED_MAP = [
-[G,G,G,G,G,G,G,G],
-[D,G,G,G,G,G,G,G],
-[G,G,G,G,G,G,G,G],
-[G,G,G,G,G,G,G,G],
-[G,G,G,G,G,G,G,G],
-[G,G,G,G,G,G,G,G]
+[F,G,F,F,F],
+[F,G,G,G,F],
+[F,F,F,G,F],
+[F,F,G,G,F],
+[F,F,G,F,F],
 ]
 
 MAP = [ [makeTile(row,col,HARD_CODED_MAP[row][col], ((1000*row)+col) ) for col in range(WIDTH)] for row in range(HEIGHT)]
