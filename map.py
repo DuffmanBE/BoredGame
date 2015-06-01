@@ -27,7 +27,13 @@ def id2coord(id):
 def makeTile(x,y,str, id):
 	global TABLE
 	TABLE[id] = (x,y)
-	return {'tile': True , 'type': str , 'rfid': id}
+	return {
+	'tile'      : True ,
+	'type'      : str ,
+	'rfid'      : id,
+	'character' : False , 
+	'items'     : list()
+}
 
 
 WIDTH  = 15
@@ -74,6 +80,25 @@ def SE((x,y)): return (x+1  , y-1)
 def SW((x,y)): return (x-1  , y-1)
 
 def asPoint(x,y): return (x,y)
+
+#
+# Set tile content
+#
+def tileSetCharacter(tile, character):
+	tile['character'] = character
+
+def tileUnsetCharacter(tile, character):
+	tile['character'] = False
+
+def tileAddItem(tile ,item):
+	tile['items'].append(item)
+
+def tileUseItem(tile ,item):
+	if tile in player['items']:
+		tile['items'].remove(item)
+		return True
+	else:
+		return False
 
 
 print getTilesFromCoord((12,9))
