@@ -18,9 +18,13 @@
     
 '''
 
+def makeTile(str):
+	return {'tile': True , 'type': str }
+
+
 WIDTH  = 15
 HEIGHT = 10
-MAP    = [[False for x in range(HEIGHT)] for x in range(WIDTH)]
+MAP    = [[makeTile('grass') for x in range(HEIGHT)] for x in range(WIDTH)]
 
 def getTile((x,y)): return MAP[x][y]
 
