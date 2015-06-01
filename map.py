@@ -100,6 +100,6 @@ def tileUseItem(tile ,item):
 	else:
 		return False
 
-
-print getTilesFromCoord((12,9))
-print getTilesFromId(12009)
+def simpleTest():
+	print getTilesFromCoord((12,9))
+	print getTilesFromId(12009)
