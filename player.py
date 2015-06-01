@@ -4,16 +4,19 @@
 def makePlayer(character):
 	return {'player' : True , 'character' : character , 'points' : 0 , 'items' : list() }
 
-def decrPoints(player):
+def playerDecrPoints(player):
 	player['points'] = player['points']-1
 
-def incrPoints(player):
+def playerIncrPoints(player):
 	player['points'] = player['points']+1
 
-def addItem(player ,item):
+def playerAddPoints(player, p):
+	player['points'] = player['points']+p
+
+def playerAddItem(player ,item):
 	player['items'].append(item)
 
-def useItem(player ,item):
+def playerUseItem(player ,item):
 	if item in player['items']:
 		player['items'].remove(item)
 		return True
