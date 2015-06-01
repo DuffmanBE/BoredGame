@@ -23,6 +23,7 @@ def new_client(client, server):
     characters[client['id']]= makePlayer('char'+str(client['id']))
     tileSetCharacter(getTileFromId(last_position['char1']),'char1')
     server.send_message_to_all("Hey all, a new client has joined us")
+    print characters
 
 
 # Called for every client disconnecting
@@ -32,24 +33,34 @@ def client_left(client, server):
 
 # Called when a client sends a message (This happens when player moves)
 def message_received(client, server, message):
-    mymsg = "{\"action\": \"claim_char\", \"id\": \"1337\"}"
-    jsonobj = json.loads(mymsg)
+    #mymsg = "{\"action\": \"claim_char\", \"id\": \"1337\"}"
+    jsonobj = json.loads(message)
+    print jsonobj
     print client['id']
     if(jsonobj['action'] == "move"):
         print("move action")
         character = characters[client['id']]['character']
-        tileUnsetCharacter(getTileFromId(last_position[character]))
-        tileSetCharacter(getTileFromId(jsonobj['id']), character)
-        #reply = getTilesFromId(jsonobj['id'])
-        #server.send_message(client, reply)
+        tileUnsetCharacter(getTileFromId(last_position[character]), character)
+        tileSetCharacter(getTileFromId(int(jsonobj['id'])), character)
+        last_position[character] = int(jsonobj['id'])
+        tiles = getTilesFromId(int(jsonobj['id']))
+        tilelist = list()
+        for row in tiles:
+            for tile in row:
+                tilelist.append(tile)
+        reply = json.dumps(tilelist)
+        #print tiles
+        #print tiles[0][0]
+        #reply = "[{\"tile\": \"True\", \"type\": \"grass\", \"xco\": \"0\", \"yco\": \"0\", \"char\": \"char1\" }]"
+        server.send_message(client, reply)
     if(jsonobj['action'] == "claim_char"):
         print("Character selection")
-        characters[client['id']]= makePlayer('char'+client['id'])
+        #characters[client['id']]= makePlayer('char'+str(client['id']))
+    print("chars")
+    print characters
+    print("last_position")
+    print last_position
 
-
-    #print jsonobj
-    #print jsonobj['action']
-    #print jsonobj['id']
 	#print("Client(%d) said: %s" % (client['id'], message))
 
 def send_position(client):
