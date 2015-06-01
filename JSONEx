@@ -1,3 +1,4 @@
-{“Action” : {“Move” : “3”},
-	  {“Selection” : “5”}
-}
+{action: "move",
+id: 5}
+{action: "claim",
+id:3}
