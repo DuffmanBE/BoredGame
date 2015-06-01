@@ -1,8 +1,19 @@
 #!/usr/bin/env python
 
+CHARACTERS = ["char1", "char2", "char3", "char3", "char5"]
+AVAILABLE_CHARACTERS = CHARACTERS[:]
 
 def makePlayer(character):
-	return {'player' : True , 'character' : character , 'points' : 0 , 'items' : list() }
+	global AVAILABLE_CHARACTERS
+	if character in AVAILABLE_CHARACTERS:
+		AVAILABLE_CHARACTERS.remove(character)
+		return {'player' : True , 'character' : character , 'points' : 0 , 'items' : list() }
+	else:
+		return False
+
+def getAvailableCharactgers():
+	global AVAILABLE_CHARACTERS
+	return AVAILABLE_CHARACTERS
 
 def playerDecrPoints(player):
 	player['points'] = player['points']-1
