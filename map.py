@@ -101,5 +101,5 @@ def tileUseItem(tile ,item):
 		return False
 
 
-print getTilesFromCoord((12,9))
-print getTilesFromId(12009)
+#print getTilesFromCoord((12,9))
+#print getTilesFromId(12009)
