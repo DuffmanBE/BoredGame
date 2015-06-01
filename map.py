@@ -3,8 +3,8 @@
 '''
     3 global variables: WIDTH HEIGHT and MAP
     
-    y
-    ^
+   
+    +-WIDTH--------------> col
     |
     |H
     |E
@@ -13,7 +13,8 @@
     |H
     |T
     |
-    +-WIDTH--------------> x
+    v
+    row
     
     
 '''
@@ -24,9 +25,9 @@ TABLE = dict()
 def id2coord(id):
 	return TABLE[id]
 
-def makeTile(x,y,str, id):
+def makeTile(row,col,str, id):
 	global TABLE
-	TABLE[id] = (x,y)
+	TABLE[id] = (row,col)
 	return {
 	'tile'      : True ,
 	'type'      : str ,
@@ -38,7 +39,18 @@ def makeTile(x,y,str, id):
 
 WIDTH  = 8
 HEIGHT = 6
-MAP    = [ [makeTile(x,y,"grass", ((1000*x)+y) ) for y in range(HEIGHT)] for x in range(WIDTH)]
+G = "grass"
+D = "dirt"
+HARD_CODED_MAP = [
+[G,G,G,G,G,G,G,G],
+[D,G,G,G,G,G,G,G],
+[G,G,G,G,G,G,G,G],
+[G,G,G,G,G,G,G,G],
+[G,G,G,G,G,G,G,G],
+[G,G,G,G,G,G,G,G]
+]
+
+MAP = [ [makeTile(row,col,HARD_CODED_MAP[row][col], ((1000*row)+col) ) for col in range(WIDTH)] for row in range(HEIGHT)]
 
 
 
@@ -48,9 +60,9 @@ def getTileFromId(id):
 def getTilesFromId(id):
 	return getTilesFromCoord( id2coord(id) )
 
-def getTileFromCoord((x,y)):
-	if ( isWithinBounds((x,y)) ):
-		return MAP[x][y]
+def getTileFromCoord((row,col)):
+	if ( isWithinBounds((row,col)) ):
+		return MAP[row][col]
 	else:
 		return False
 
@@ -61,25 +73,25 @@ def getTilesFromCoord(p):
 	[ getTileFromCoord( SW(p) ), getTileFromCoord( S(p) ), getTileFromCoord( SE(p) ) ]
 	]
 
-def isWithinBounds((x,y)):
+def isWithinBounds((row,col)):
 	global WIDTH
 	global HEIGHT
-	if (x<0) or (y<0) or (x>=WIDTH) or (y>=HEIGHT):
+	if (row<0) or (row<0) or (col>=WIDTH) or (row>=HEIGHT):
 		return False
 	else: 
 		return True
 
-def N((x,y)): return (x   , y+1)
-def S((x,y)): return (x   , y-1)
-def E((x,y)): return (x-1 , y)
-def W((x,y)): return (x+1 , y)
+def N((row,col)): return (row   , col-1)
+def S((row,col)): return (row   , col+1)
+def W((row,col)): return (row-1 , col)
+def E((row,col)): return (row+1 , col)
 
-def NE((x,y)): return (x+1  , y+1)
-def NW((x,y)): return (x-1  , y+1)
-def SE((x,y)): return (x+1  , y-1)
-def SW((x,y)): return (x-1  , y-1)
+def NE((row,col)): return (row+1  , col-1)
+def NW((row,col)): return (row-1  , col-1)
+def SE((row,col)): return (row+1  , col+1)
+def SW((row,col)): return (row-1  , col+1)
 
-def asPoint(x,y): return (x,y)
+def asPoint(row,col): return (row,col)
 
 #
 # Set tile content
@@ -102,5 +114,8 @@ def tileUseItem(tile ,item):
 
 
 def simpleTest():
-	print getTilesFromCoord((12,9))
-	print getTilesFromId(12009)
+	print getTileFromCoord((0,0))
+	print getTileFromCoord(S((0,0)))
+	print getTileFromCoord(E((0,0)))
+
+simpleTest()
