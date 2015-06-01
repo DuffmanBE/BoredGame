@@ -1,5 +1,3 @@
-{"Move": {
-    "ID": "1",
-    "From" : "2",
-    "To" : "3"
-}}
+{“Action” : {“Move” : “3”},
+	  {“Selection” : “5”}
+}
