@@ -36,8 +36,8 @@ def makeTile(x,y,str, id):
 }
 
 
-WIDTH  = 15
-HEIGHT = 10
+WIDTH  = 8
+HEIGHT = 6
 MAP    = [ [makeTile(x,y,"grass", ((1000*x)+y) ) for y in range(HEIGHT)] for x in range(WIDTH)]
 
 
