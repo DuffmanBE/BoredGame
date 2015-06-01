@@ -24,6 +24,13 @@ MAP    = [[False for x in range(HEIGHT)] for x in range(WIDTH)]
 
 def getTile((x,y)): return MAP[x][y]
 
+def getTiles(p):
+	return [
+	[ getTile( NW(p) ), getTile( N(p) ), getTile( NE(p) ) ] ,
+	[ getTile( W(p) ),  getTile( p ),    getTile( E(p) ) ] ,
+	[ getTile( SW(p) ), getTile( S(p) ), getTile( SE(p) ) ]
+	]
+
 def isWithinBounds((x,y)):
 	global WIDTH
 	global HEIGHT
@@ -32,10 +39,15 @@ def isWithinBounds((x,y)):
 	else: 
 		return True
 
-def up((x,y)):    return (x   , y+1)
-def down((x,y)):  return (x   , y-1)
-def left((x,y)):  return (x-1 , y)
-def right((x,y)): return (x+1 , y)
+def N((x,y)): return (x   , y+1)
+def S((x,y)): return (x   , y-1)
+def E((x,y)): return (x-1 , y)
+def W((x,y)): return (x+1 , y)
+
+def NE((x,y)): return (x+1  , y+1)
+def NW((x,y)): return (x-1  , y+1)
+def SE((x,y)): return (x+1  , y-1)
+def SW((x,y)): return (x-1  , y-1)
 
 def asPoint(x,y): return (x,y)
 
