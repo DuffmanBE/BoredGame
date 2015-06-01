@@ -77,3 +77,4 @@ def asPoint(x,y): return (x,y)
 
 
 print getTilesFromCoord((12,9))
+print getTilesFromId(12009)
